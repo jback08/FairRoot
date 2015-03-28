@@ -384,7 +384,8 @@ void FairMCApplication::InitMC(const char* setup, const char* cuts)
 // ---
   fStack = dynamic_cast<FairGenericStack*>(gMC->GetStack()) ;
   if(fStack==NULL) { fLogger->Fatal(MESSAGE_ORIGIN, "NO Stack defined "); }
-  gMC->SetMagField(fxField);
+  // Set the global magnetic field only if fxField exists
+  if (fxField) {gMC->SetMagField(fxField);}
 
   gMC->Init();
   gMC->BuildPhysics();
